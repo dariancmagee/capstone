@@ -1,8 +1,9 @@
 import styles from "./styles.module.css";
 import React, {useState} from 'react';
+import BasicPagination from "./Pagination";
 
 
-const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
+const exerciseKey = 'b8df9963admsh684c57c571ebbcap1ca6bdjsnff7a2f6a4584';
 
 const handleLogout = () => {
   localStorage.removeItem("token");
@@ -17,6 +18,7 @@ function Home() {
     setBodyPart(newBodyPart)
   }
   const axios = require('axios');
+  
   function getExerciseData() {
   const options = {
     method: 'GET',
@@ -62,10 +64,8 @@ function Home() {
          </form>
 		 <button onClick={getExerciseData}>Get List of Exercises</button>
     </div>
-  );
   
-	
-
+  );	
 	
 };
 
