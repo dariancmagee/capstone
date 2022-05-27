@@ -1,27 +1,16 @@
-// import styles from "./styles.module.css";
-
-// const Main = () => {
-// 	const handleLogout = () => {
-// 		localStorage.removeItem("token");
-// 		window.location.reload();
-// 	};
-
-// 	return (
-// 		<div className={styles.main_container}>
-// 			<nav className={styles.navbar}>
-// 				<h1>DC Fitness</h1>
-// 				<button className={styles.white_btn} onClick={handleLogout}>
-// 					Logout
-// 				</button>
-// 			</nav>
-// 		</div>
-// 	);
-// };
-
-// export default Main;
-
+import styles from "./styles.module.css";
 import React, {useState} from 'react';
+
+
 const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
+
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.reload();
+};
+
+
+
 function Home() {
   const [bodyPart, setBodyPart] = useState("");
   const changeBodyPart = (newBodyPart) => {
@@ -45,7 +34,14 @@ function Home() {
   }
   return (
     <div className="App">
-        <h1>Fitness App</h1>
+      <nav className={styles.navbar}>
+        <h1>DJ Fitness</h1>
+				<button className={styles.white_btn} onClick={handleLogout}>
+					Logout
+				</button>
+			</nav>
+      <br />
+      <br />
           <form className="controls">
             <select
               onChange={(event) => changeBodyPart(event.target.value)}
@@ -67,8 +63,17 @@ function Home() {
 		 <button onClick={getExerciseData}>Get List of Exercises</button>
     </div>
   );
-}
+  
+	
+
+	
+};
+
 export default Home;
+
+
+	
+	
 
 
 
