@@ -18,9 +18,9 @@ export default function ExerciseCard({
       <CardActionArea>
         <CardMedia
           component="img"
-          height="140"
+          height="210"
           image={gifUrl}
-          alt="green iguana"
+          alt="Excercises"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -29,15 +29,19 @@ export default function ExerciseCard({
           <Typography variant="body2" color="text.secondary">
             <p>BodyPart: {bodyPart}</p>
             <p>Equipment: {equipment}</p>
-            <Button
-              variant="secondary"
-              className="add-to-favorites"
-              onClick={() => addToFavorites({ id, bodyPart, equipment })}
-            >
-              {isAddedFavorite
-                ? "Already added to favorites"
-                : "Add to Favorites"}
-            </Button>
+            {addToFavorites && (
+              <Button
+                variant="secondary"
+                className="add-to-favorites"
+                onClick={() =>
+                  addToFavorites({ id, bodyPart, equipment, gifUrl, name })
+                }
+              >
+                {isAddedFavorite
+                  ? "Already added to favorites"
+                  : "Add to Favorites"}
+              </Button>
+            )}
           </Typography>
         </CardContent>
       </CardActionArea>

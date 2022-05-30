@@ -31,12 +31,14 @@ code {
 	  justify-content: center;
 	  align-items: center;
 	flex-wrap: wrap;
+	width: 800px;
+	margin: auto;
   }
 
   .exercise-list .exercise-item {
 	  margin: 5px;
 	  width: 250px;
-	  min-height: 250px;
+	  height: 450px;
   }
 
   .exercise-list .exercise-item .add-to-favorites {
