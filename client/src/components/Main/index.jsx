@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import React, {useState} from 'react';
 import MediaCard from "../../Cards";
 import ExerciseCard from "../../ExerciseCard";
+import BasicPagination from "./Pagination";
 
 
 const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
@@ -106,6 +107,7 @@ function Home() {
          <ExerciseCard key={exercise.id} {...exercise} addToFavorites={addToFavorites} isAddedFavorite={addedFavorite}/>
        )
      })}
+     <BasicPagination  />
      </div>
     </div>
   );
