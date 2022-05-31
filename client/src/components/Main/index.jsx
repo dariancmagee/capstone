@@ -1,8 +1,9 @@
 import styles from "./styles.module.css";
 import React, {useState} from 'react';
-import MediaCard from "../../Cards";
+
 import ExerciseCard from "../../ExerciseCard";
 import BasicPagination from "./Pagination";
+import { Link } from "react-router-dom";
 
 
 const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
@@ -74,6 +75,11 @@ function Home() {
     <div className="App">
       <nav className={styles.navbar}>
         <h1>DJ Fitness</h1>
+        <Link to="/about">
+						<button type="button" className={styles.white_btn}>
+							About Us
+						</button>
+					</Link>
 				<button className={styles.white_btn} onClick={handleLogout}>
 					Logout
 				</button>
