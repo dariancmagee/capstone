@@ -1,9 +1,13 @@
 import styles from "./styles.module.css";
-import React, { useState } from "react";
-import MediaCard from "../../Cards";
+
+import React, {useState} from 'react';
+
+import BasicPagination from "./Pagination";
+import { Link } from "react-router-dom";
 import ExerciseCard from "../../ExerciseCard";
 import Header from "../Header";
 import { getAddedFavorites } from "../../utils/functions";
+
 
 const exerciseKey = "c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd";
 
@@ -82,6 +86,48 @@ function Home() {
   };
   return (
     <div className="App">
+      <nav className={styles.navbar}>
+        <h1>DJ Fitness</h1>
+        <Link to="/about">
+						<button type="button" className={styles.white_btn}>
+							About Us
+						</button>
+					</Link>
+				<button className={styles.white_btn} onClick={handleLogout}>
+					Logout
+				</button>
+			</nav>
+      <br />
+      <br />
+          <form className="controls">
+            <select
+              onChange={(event) => changeBodyPart(event.target.value)}
+              value={bodyPart}
+            >
+              <option value=""></option>
+              <option value="back">Waist</option>
+              <option value="cardio">Cardio</option>
+              <option value="chest">Chest</option>
+              <option value="lower arms">Lower Arms</option>
+              <option value="lower legs">Lower Legs</option>
+              <option value="neck">Neck</option>
+              <option value="shoulders">Shoulders</option>
+              <option value="upper arms">Upper Arms</option>
+              <option value="upper legs">Upper legs</option>
+              <option value="waist">Waist</option>
+            </select>
+         </form>
+		 <button onClick={handleOnClick}>Get List of Exercises</button>
+     <div className="exercise-list">
+
+     {exercises && exercises.slice(0,10).map(function(exercise){
+       const addedFavorite = favoritesList?.find(item => item.id === exercise.id) || false; 
+       return (
+         <ExerciseCard key={exercise.id} {...exercise} addToFavorites={addToFavorites} isAddedFavorite={addedFavorite}/>
+       )
+     })}
+     <BasicPagination  />
+     </div>
       <Header />
       <br />
       <br />
