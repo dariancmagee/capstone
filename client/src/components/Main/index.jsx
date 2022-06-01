@@ -4,6 +4,7 @@ import MediaCard from "../../Cards";
 import ExerciseCard from "../../ExerciseCard";
 import Header from "../Header";
 import { getAddedFavorites } from "../../utils/functions";
+import background from "./bghomepage.jpg";
 
 const exerciseKey = "c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd";
 
@@ -26,7 +27,6 @@ function Home() {
         },
       };
       const { data } = await axios.request(options);
-      console.log(data);
       setExercises(data);
     } catch (error) {
       console.log(error);
@@ -36,7 +36,6 @@ function Home() {
 
   const handleOnClick = function () {
     getAddedFavorites().then(function (result) {
-      console.log({ result });
       setFavoritesList(result);
       getExerciseData();
     });
@@ -75,7 +74,6 @@ function Home() {
           token,
         }
       );
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

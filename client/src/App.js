@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     try {
       const user = JSON.parse(localStorage.getItem("token") || null);
-      console.log({ user });
       setUser(user);
     } catch (error) {
       console.log(error);

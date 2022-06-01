@@ -8,7 +8,6 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    localStorage.removeItem("email");
     navigate("/login");
   };
 
@@ -16,11 +15,12 @@ const Header = () => {
     <nav className={styles.navbar}>
       <img src={logo} alt="Logo" height={65} width={65} />
       <h1>
-        <Link to="/profile">View Profile</Link>
+      <Link to="/profile"></Link>
       </h1>
       <button className={styles.white_btn} onClick={handleLogout}>
         Logout
       </button>
+      
     </nav>
   );
 };

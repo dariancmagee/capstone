@@ -7,7 +7,6 @@ const getAddedFavorites = async function () {
       `http://localhost:8080/api/users/favorites`,
       { token }
     );
-    console.log({ data });
     return data[0].favorites;
     // setFavoritesList(data[0].favorites);
   } catch (error) {

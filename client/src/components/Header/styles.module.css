@@ -4,11 +4,32 @@
 	background-color: #2667f1;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	
 }
 
 .navbar h1 {
 	color: white;
 	font-size: 25px;
-	margin-left: 20px;
+	text-align:center;
 }
+
+a:link {
+	color: red;
+  }
+
+  .white_btn {
+	border: none;
+	outline: none;
+	padding: 12px 0;
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+	width: 120px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	margin-right: 20px;
+	justify-content: flex-end;
+	align-items: flex-end;
+
+  }
+

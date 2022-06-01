@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+import logo from "./logo.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ const Login = () => {
       const url = "http://localhost:8080/api/auth";
       const { data: res } = await axios.post(url, data);
       const { token, user } = res.data;
-      console.log({ res });
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem(
         "user",
@@ -42,6 +42,7 @@ const Login = () => {
       <div className={styles.login_form_container}>
         <div className={styles.left}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
+            <img src={logo} alt="Logo" height={250} width={250} />
             <h1>Login to Your Account</h1>
             <input
               type="email"
