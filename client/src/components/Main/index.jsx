@@ -1,6 +1,5 @@
 import styles from "./styles.module.css";
 import React, {useState} from 'react';
-
 import ExerciseCard from "../../ExerciseCard";
 import BasicPagination from "./Pagination";
 import { Link } from "react-router-dom";

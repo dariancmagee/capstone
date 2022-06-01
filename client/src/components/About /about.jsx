@@ -17,7 +17,10 @@ return (
             <h1>DJ Fitness</h1>
             <Link to="/">
 						<button type="button" className={styles.white_btn}>
-							Home
+							Profile
+						</button>
+            <button type="button" className={styles.white_btn}>
+							Exercises
 						</button>
 					</Link>
 				<button className={styles.white_btn} onClick={handleLogout}>
