@@ -4,8 +4,6 @@ import { getAddedFavorites } from "../../utils/Functions";
 import ExerciseCard from "../../ExerciseCard";
 import Header2 from "../Header2";
 
-
-
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState(null);

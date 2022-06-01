@@ -12,8 +12,6 @@ const handleLogout = () => {
   window.location.reload();
 };
 
-
-
 function Home() {
   const [bodyPart, setBodyPart] = useState("");
   const [exercises, setExercises] = useState([]);
@@ -98,7 +96,7 @@ function Home() {
               value={bodyPart}
             >
               <option value=""></option>
-              <option value="back">Waist</option>
+              <option value="back">Back</option>
               <option value="cardio">Cardio</option>
               <option value="chest">Chest</option>
               <option value="lower arms">Lower Arms</option>
