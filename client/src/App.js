@@ -6,7 +6,7 @@ import Profile from "./components/Profile";
 import About from "./components/About ";
 
 function App() {
-  const user = localStorage.getItem("token";
+  const user = localStorage.getItem("token");
 
 	return (
 		<Routes>
