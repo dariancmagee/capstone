@@ -1,15 +1,16 @@
 import styles from "./styles.module.css";
-
 import React, {useState} from 'react';
-
+import logo from "./logo.jpg";
+import ExerciseCard from "../../ExerciseCard";
 import BasicPagination from "./Pagination";
 import { Link } from "react-router-dom";
-import ExerciseCard from "../../ExerciseCard";
-import Header from "../Header";
-import { getAddedFavorites } from "../../utils/functions";
 
+const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
 
-const exerciseKey = "c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd";
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.reload();
+};
 
 function Home() {
   const [bodyPart, setBodyPart] = useState("");
@@ -17,7 +18,7 @@ function Home() {
   const [favoritesList, setFavoritesList] = useState([]);
   const changeBodyPart = (newBodyPart) => {
     setBodyPart(newBodyPart);
-  };
+  }; 
   const axios = require("axios");
   async function getExerciseData() {
     try {
@@ -46,7 +47,7 @@ function Home() {
     });
   };
 
-  /*const getAddedFavorites =  async function() {
+  const getAddedFavorites =  async function() {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
       const {data} = await axios.post(`http://localhost:8080/api/users/favorites`, {token});
@@ -55,7 +56,7 @@ function Home() {
     } catch (error) {
       console.log(error);
     }
-  }*/
+  }
 
   const addToFavorites = async function ({
     id,
@@ -87,7 +88,12 @@ function Home() {
   return (
     <div className="App">
       <nav className={styles.navbar}>
-        <h1>DJ Fitness</h1>
+      <img src={logo} alt="logo" height={65} width={65} />
+      <Link to="/profile">
+						<button type="button" className={styles.white_btn}>
+							Profile
+						</button>
+					</Link>
         <Link to="/about">
 						<button type="button" className={styles.white_btn}>
 							About Us
@@ -97,15 +103,17 @@ function Home() {
 					Logout
 				</button>
 			</nav>
+      
       <br />
       <br />
+      
           <form className="controls">
             <select
               onChange={(event) => changeBodyPart(event.target.value)}
               value={bodyPart}
             >
               <option value=""></option>
-              <option value="back">Waist</option>
+              <option value="back">Back</option>
               <option value="cardio">Cardio</option>
               <option value="chest">Chest</option>
               <option value="lower arms">Lower Arms</option>
@@ -117,7 +125,8 @@ function Home() {
               <option value="waist">Waist</option>
             </select>
          </form>
-		 <button onClick={handleOnClick}>Get List of Exercises</button>
+         <br />
+		 <button className={styles.list} onClick={handleOnClick}>Get List of Exercises</button>
      <div className="exercise-list">
 
      {exercises && exercises.slice(0,10).map(function(exercise){
@@ -128,45 +137,12 @@ function Home() {
      })}
      <BasicPagination  />
      </div>
-      <Header />
-      <br />
-      <br />
-      <form className="controls">
-        <select
-          onChange={(event) => changeBodyPart(event.target.value)}
-          value={bodyPart}
-        >
-          <option value=""></option>
-          <option value="back">Back</option>
-          <option value="cardio">Cardio</option>
-          <option value="chest">Chest</option>
-          <option value="lower arms">Lower Arms</option>
-          <option value="lower legs">Lower Legs</option>
-          <option value="neck">Neck</option>
-          <option value="shoulders">Shoulders</option>
-          <option value="upper arms">Upper Arms</option>
-          <option value="upper legs">Upper legs</option>
-          <option value="waist">Waist</option>
-        </select>
-      </form>
-      <button onClick={handleOnClick}>Get List of Exercises</button>
-      <div className="exercise-list">
-        {exercises &&
-          exercises.slice(0, 20).map(function (exercise) {
-            const addedFavorite =
-              favoritesList?.find((item) => item.id === exercise.id) || false;
-            return (
-              <ExerciseCard
-                key={exercise.id}
-                {...exercise}
-                addToFavorites={addToFavorites}
-                isAddedFavorite={addedFavorite}
-              />
-            );
-          })}
-      </div>
+      
     </div>
-  );
-}
+
+  );	
+	
+};
+
 
 export default Home;

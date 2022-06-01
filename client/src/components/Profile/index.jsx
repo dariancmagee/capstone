@@ -1,11 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Header from "../Header";
 import styles from "./styles.module.css";
-import Main from "../Main/index";
-import { Link } from "react-router-dom";
-import { getAddedFavorites } from "../../utils/functions";
+import { getAddedFavorites } from "../../utils/Functions";
 import ExerciseCard from "../../ExerciseCard";
+import Header2 from "../Header2";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -27,18 +24,17 @@ const Profile = () => {
       console.log(error);
     }
   }, []);
-
   console.log({ user });
+
   return (
-    <div>
-      <Header />
+      <div>
+        <Header2 />
       {user && (
         <div className={styles.profileInfo}>
           <div> Username: {user.userName}</div>
-          <div> Email: {user.email}</div>
+          <div> Email: {user.email}</div> 
         </div>
       )}
-      <Link to="/exercises">See all exercises</Link>
       <hr />
       <div className="exercise-list">
         {exercises &&
@@ -49,5 +45,4 @@ const Profile = () => {
     </div>
   );
 };
-
 export default Profile;
