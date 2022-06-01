@@ -1,16 +1,12 @@
 import styles from "./styles.module.css";
-import React, {useState} from 'react';
-import logo from "./logo.jpg";
+import React, { useState } from "react";
+import MediaCard from "../../Cards";
 import ExerciseCard from "../../ExerciseCard";
-import BasicPagination from "./Pagination";
-import { Link } from "react-router-dom";
+import Header from "../Header";
+import { getAddedFavorites } from "../../utils/functions";
+import background from "./bghomepage.jpg";
 
-const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
-
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  window.location.reload();
-};
+const exerciseKey = "b8df9963admsh684c57c571ebbcap1ca6bdjsnff7a2f6a4584";
 
 function Home() {
   const [bodyPart, setBodyPart] = useState("");
@@ -18,7 +14,7 @@ function Home() {
   const [favoritesList, setFavoritesList] = useState([]);
   const changeBodyPart = (newBodyPart) => {
     setBodyPart(newBodyPart);
-  }; 
+  };
   const axios = require("axios");
   async function getExerciseData() {
     try {
@@ -31,7 +27,6 @@ function Home() {
         },
       };
       const { data } = await axios.request(options);
-      console.log(data);
       setExercises(data);
     } catch (error) {
       console.log(error);
@@ -41,13 +36,12 @@ function Home() {
 
   const handleOnClick = function () {
     getAddedFavorites().then(function (result) {
-      console.log({ result });
       setFavoritesList(result);
       getExerciseData();
     });
   };
 
-  const getAddedFavorites =  async function() {
+  /*const getAddedFavorites =  async function() {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
       const {data} = await axios.post(`http://localhost:8080/api/users/favorites`, {token});
@@ -56,7 +50,7 @@ function Home() {
     } catch (error) {
       console.log(error);
     }
-  }
+  }*/
 
   const addToFavorites = async function ({
     id,
@@ -80,69 +74,51 @@ function Home() {
           token,
         }
       );
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div className="App">
-      <nav className={styles.navbar}>
-      <img src={logo} alt="logo" height={65} width={65} />
-      <Link to="/profile">
-						<button type="button" className={styles.white_btn}>
-							Profile
-						</button>
-					</Link>
-        <Link to="/about">
-						<button type="button" className={styles.white_btn}>
-							About Us
-						</button>
-					</Link>
-				<button className={styles.white_btn} onClick={handleLogout}>
-					Logout
-				</button>
-			</nav>
-      
+      <Header />
       <br />
       <br />
-      
-          <form className="controls">
-            <select
-              onChange={(event) => changeBodyPart(event.target.value)}
-              value={bodyPart}
-            >
-              <option value=""></option>
-              <option value="back">Back</option>
-              <option value="cardio">Cardio</option>
-              <option value="chest">Chest</option>
-              <option value="lower arms">Lower Arms</option>
-              <option value="lower legs">Lower Legs</option>
-              <option value="neck">Neck</option>
-              <option value="shoulders">Shoulders</option>
-              <option value="upper arms">Upper Arms</option>
-              <option value="upper legs">Upper legs</option>
-              <option value="waist">Waist</option>
-            </select>
-         </form>
-         <br />
-		 <button className={styles.list} onClick={handleOnClick}>Get List of Exercises</button>
-     <div className="exercise-list">
-
-     {exercises && exercises.slice(0,10).map(function(exercise){
-       const addedFavorite = favoritesList?.find(item => item.id === exercise.id) || false; 
-       return (
-         <ExerciseCard key={exercise.id} {...exercise} addToFavorites={addToFavorites} isAddedFavorite={addedFavorite}/>
-       )
-     })}
-     <BasicPagination  />
-     </div>
-      
+      <form className="controls">
+        <select
+          onChange={(event) => changeBodyPart(event.target.value)}
+          value={bodyPart}
+        >
+          <option value=""></option>
+          <option value="back">Back</option>
+          <option value="cardio">Cardio</option>
+          <option value="chest">Chest</option>
+          <option value="lower arms">Lower Arms</option>
+          <option value="lower legs">Lower Legs</option>
+          <option value="neck">Neck</option>
+          <option value="shoulders">Shoulders</option>
+          <option value="upper arms">Upper Arms</option>
+          <option value="upper legs">Upper legs</option>
+          <option value="waist">Waist</option>
+        </select>
+      </form>
+      <button onClick={handleOnClick}>Get List of Exercises</button>
+      <div className="exercise-list">
+        {exercises &&
+          exercises.slice(0, 20).map(function (exercise) {
+            const addedFavorite =
+              favoritesList?.find((item) => item.id === exercise.id) || false;
+            return (
+              <ExerciseCard
+                key={exercise.id}
+                {...exercise}
+                addToFavorites={addToFavorites}
+                isAddedFavorite={addedFavorite}
+              />
+            );
+          })}
+      </div>
     </div>
-
-  );	
-	
-};
-
+  );
+}
 
 export default Home;
