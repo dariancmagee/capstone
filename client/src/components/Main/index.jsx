@@ -12,44 +12,44 @@ const handleLogout = () => {
   window.location.reload();
 };
 
-
-
 function Home() {
   const [bodyPart, setBodyPart] = useState("");
   const [exercises, setExercises] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
   const changeBodyPart = (newBodyPart) => {
-    setBodyPart(newBodyPart)
-  }
-  const axios = require('axios');
+    setBodyPart(newBodyPart);
+  }; 
+  const axios = require("axios");
   async function getExerciseData() {
     try {
       const options = {
-        method: 'GET',
+        method: "GET",
         url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
         headers: {
-          'X-RapidAPI-Host': `exercisedb.p.rapidapi.com/`,
-          'X-RapidAPI-Key': `${exerciseKey}`
-        }
+          "X-RapidAPI-Host": `exercisedb.p.rapidapi.com/`,
+          "X-RapidAPI-Key": `${exerciseKey}`,
+        },
       };
-     const {data} = await axios.request(options);
+      const { data } = await axios.request(options);
       console.log(data);
-      setExercises(data); 
+      setExercises(data);
     } catch (error) {
       console.log(error);
       setExercises([]);
     }
   }
 
-  const handleOnClick = function() {
-    getAddedFavorites().then(function() {
+  const handleOnClick = function () {
+    getAddedFavorites().then(function (result) {
+      console.log({ result });
+      setFavoritesList(result);
       getExerciseData();
-    })
-  }
+    });
+  };
 
   const getAddedFavorites =  async function() {
     try {
-      const token = localStorage.getItem("token");
+      const token = JSON.parse(localStorage.getItem("token"));
       const {data} = await axios.post(`http://localhost:8080/api/users/favorites`, {token});
       console.log({data});
       setFavoritesList(data[0].favorites);
@@ -57,19 +57,34 @@ function Home() {
       console.log(error);
     }
   }
-  
-  const addToFavorites = async function({id, photo, bodyPart, equipment}) {
+
+  const addToFavorites = async function ({
+    id,
+    photo,
+    bodyPart,
+    equipment,
+    gifUrl,
+    name,
+  }) {
     try {
-      const token = localStorage.getItem("token");
-      const {data} = await axios.post('http://localhost:8080/api/users/addtoFavorites', {
-        id, photo, bodyPart, equipment,
-        token
-      });
+      const token = JSON.parse(localStorage.getItem("token"));
+      const { data } = await axios.post(
+        "http://localhost:8080/api/users/addtoFavorites",
+        {
+          id,
+          photo,
+          bodyPart,
+          equipment,
+          gifUrl,
+          name,
+          token,
+        }
+      );
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div className="App">
       <nav className={styles.navbar}>
@@ -98,7 +113,7 @@ function Home() {
               value={bodyPart}
             >
               <option value=""></option>
-              <option value="back">Waist</option>
+              <option value="back">Back</option>
               <option value="cardio">Cardio</option>
               <option value="chest">Chest</option>
               <option value="lower arms">Lower Arms</option>
@@ -122,9 +137,12 @@ function Home() {
      })}
      <BasicPagination  />
      </div>
+      
     </div>
+
   );	
 	
 };
+
 
 export default Home;
