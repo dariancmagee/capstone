@@ -31,6 +31,8 @@ code {
 	  justify-content: center;
 	  align-items: center;
 	flex-wrap: wrap;
+	width: auto;
+	margin: auto;
   }
 
   .exercise-list .exercise-item {
@@ -39,6 +41,4 @@ code {
 	  min-height: 250px;
   }
 
-  .exercise-list .exercise-item .add-to-favorites {
-	  
-  }
+ 

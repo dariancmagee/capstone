@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import logo from "./logo.jpg";
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
@@ -18,7 +19,8 @@ const Login = () => {
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
 			window.location = "/";
-		} catch (error) {
+		} 
+	 catch (error) {
 			if (
 				error.response &&
 				error.response.status >= 400 &&
@@ -34,6 +36,7 @@ const Login = () => {
 			<div className={styles.login_form_container}>
 				<div className={styles.left}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
+					<img src={logo} alt="Logo" height={250} width={250} />
 						<h1>Login to Your Account</h1>
 						<input
 							type="email"

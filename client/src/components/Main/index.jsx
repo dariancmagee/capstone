@@ -1,10 +1,9 @@
 import styles from "./styles.module.css";
 import React, {useState} from 'react';
-
+import logo from "./logo.jpg";
 import ExerciseCard from "../../ExerciseCard";
 import BasicPagination from "./Pagination";
 import { Link } from "react-router-dom";
-
 
 const exerciseKey = 'c4f1ecc02bmsh0c475a9f65f03e4p12e506jsncd38e84e3ffd';
 
@@ -74,7 +73,12 @@ function Home() {
   return (
     <div className="App">
       <nav className={styles.navbar}>
-        <h1>DJ Fitness</h1>
+      <img src={logo} alt="logo" height={65} width={65} />
+      <Link to="/profile">
+						<button type="button" className={styles.white_btn}>
+							Profile
+						</button>
+					</Link>
         <Link to="/about">
 						<button type="button" className={styles.white_btn}>
 							About Us
@@ -84,8 +88,10 @@ function Home() {
 					Logout
 				</button>
 			</nav>
+      
       <br />
       <br />
+      
           <form className="controls">
             <select
               onChange={(event) => changeBodyPart(event.target.value)}
@@ -104,7 +110,8 @@ function Home() {
               <option value="waist">Waist</option>
             </select>
          </form>
-		 <button onClick={handleOnClick}>Get List of Exercises</button>
+         <br />
+		 <button className={styles.list} onClick={handleOnClick}>Get List of Exercises</button>
      <div className="exercise-list">
 
      {exercises && exercises.slice(0,10).map(function(exercise){
@@ -116,25 +123,8 @@ function Home() {
      <BasicPagination  />
      </div>
     </div>
-  );
-  
-	
-
+  );	
 	
 };
 
 export default Home;
-
-
-	
-	
-
-
-
-
-
-
-
-
-
-
