@@ -13,15 +13,24 @@ const Header = () => {
 
   return (
     <nav className={styles.navbar}>
-      <img src={logo} alt="Logo" height={65} width={65} />
-      <h1>
-      <Link to="/profile"></Link>
-      </h1>
-      <button className={styles.white_btn} onClick={handleLogout}>
-        Logout
-      </button>
-      
-    </nav>
+    <img src={logo} alt="Logo" height={65} width={65} />
+   
+  <Link to="/exercises">
+    <button type="button" className={styles.white_btn}>
+    Exercises
+    </button>
+  </Link>
+
+  <Link to="/about">
+        <button type="button" className={styles.white_btn}>
+    About Us
+    </button>
+  </Link>
+
+    <button className={styles.white_btn} onClick={handleLogout}>
+      Logout
+    </button>
+  </nav>
   );
 };
 
