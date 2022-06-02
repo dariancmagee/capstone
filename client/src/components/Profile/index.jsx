@@ -1,11 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header2 from "../Header2";
 import styles from "./styles.module.css";
-import Main from "../Main/index";
-import { Link } from "react-router-dom";
 import { getAddedFavorites } from "../../utils/functions";
 import ExerciseCard from "../../ExerciseCard";
+import pushups from "../video/pushups.mp4"
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -28,6 +26,18 @@ const Profile = () => {
 
   return (
     <div>
+         <video autoPlay loop muted
+    style={{
+        position: "fixed",
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        zIndex: "-1"
+    }}
+ >
+     <source src={pushups} type="video/mp4"/>
+ </video>
+    <div className="App">
       <Header2 />
       {user && (
         <div className={styles.profileInfo}>
@@ -35,15 +45,14 @@ const Profile = () => {
           <div> Email: {user.email}</div> <br />
         </div>
       )}
-      <Link to="/exercises">See all exercises</Link>
-
-      <hr />
+      
       <div className="exercise-list">
         {exercises &&
           exercises.map((exercise) => {
             return <ExerciseCard key={exercise.id} {...exercise} />;
           })}
       </div>
+    </div>
     </div>
   );
 };

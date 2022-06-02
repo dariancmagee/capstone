@@ -1,14 +1,23 @@
 import styles from "./styles.module.css";
 import React, { useState } from "react";
-import MediaCard from "../../Cards";
+import logo from "./logo.jpg";
 import ExerciseCard from "../../ExerciseCard";
-import Header from "../Header";
 import { getAddedFavorites } from "../../utils/functions";
-import background from "./bghomepage.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import bicepscurl from "../video/bicepscurl.mp4"
+
 
 const exerciseKey = "b8df9963admsh684c57c571ebbcap1ca6bdjsnff7a2f6a4584";
 
+
 function Home() {
+  
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   const [bodyPart, setBodyPart] = useState("");
   const [exercises, setExercises] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
@@ -41,17 +50,6 @@ function Home() {
     });
   };
 
-  /*const getAddedFavorites =  async function() {
-    try {
-      const token = JSON.parse(localStorage.getItem("token"));
-      const {data} = await axios.post(`http://localhost:8080/api/users/favorites`, {token});
-      console.log({data});
-      setFavoritesList(data[0].favorites);
-    } catch (error) {
-      console.log(error);
-    }
-  }*/
-
   const addToFavorites = async function ({
     id,
     photo,
@@ -79,10 +77,39 @@ function Home() {
     }
   };
   return (
+    <div>
+      <video autoPlay loop muted
+    style={{
+        position: "fixed",
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        zIndex: "-1"
+    }}
+ >
+     <source src={bicepscurl} type="video/mp4"/>
+ </video>
     <div className="App">
-      <Header />
+      
+       <nav className={styles.navbar}>
+      <img src={logo} alt="logo" height={65} width={65} />
+      <Link to="/profile">
+						<button type="button" className={styles.white_btn}>
+							Profile
+						</button>
+				</Link>
+        <Link to="/about">
+						<button type="button" className={styles.white_btn}>
+							About Us
+						</button>
+					</Link>
+				<button className={styles.white_btn} onClick={handleLogout}>
+					Logout
+				</button>
+			</nav>
       <br />
       <br />
+      <h2 className={styles.h2}>Choose Muscle Group</h2>
       <form className="controls">
         <select
           onChange={(event) => changeBodyPart(event.target.value)}
@@ -118,7 +145,9 @@ function Home() {
           })}
       </div>
     </div>
+    </div>
   );
+  
 }
 
 export default Home;
