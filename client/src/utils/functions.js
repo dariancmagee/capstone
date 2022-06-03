@@ -4,9 +4,10 @@ const getAddedFavorites = async function () {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     const { data } = await axios.post(
-      `/api/users/favorites`,
+      `http://localhost:8080/api/users/favorites`,
       { token }
     );
+    console.log({ data });
     return data[0].favorites;
     // setFavoritesList(data[0].favorites);
   } catch (error) {
