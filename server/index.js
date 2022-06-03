@@ -17,5 +17,10 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 
+app.use(express.static(path.join(__dirname, "/public")));
+
 const port = process.env.PORT || 8080;
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/public/index.html"))
+})
 app.listen(port, console.log(`Listening on port ${port}...`));
