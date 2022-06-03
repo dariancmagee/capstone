@@ -7,9 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import bicepscurl from "../video/bicepscurl.mp4"
 
 
-const exerciseKey = "b8df9963admsh684c57c571ebbcap1ca6bdjsnff7a2f6a4584";
-
-
 function Home() {
   
   const navigate = useNavigate();
@@ -32,7 +29,7 @@ function Home() {
         url: `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
         headers: {
           "X-RapidAPI-Host": `exercisedb.p.rapidapi.com/`,
-          "X-RapidAPI-Key": `${exerciseKey}`,
+          "X-RapidAPI-Key": `${process.env.REACT_APP_FITNESS_API_KEY}`,
         },
       };
       const { data } = await axios.request(options);
@@ -61,7 +58,7 @@ function Home() {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
       const { data } = await axios.post(
-        "http://localhost:8080/api/users/addtoFavorites",
+        "/api/users/addtoFavorites",
         {
           id,
           photo,
