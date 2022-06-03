@@ -19,6 +19,9 @@ MongoDB, Express, Node.js
 API:
 https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/
 
+Deployed app:
+https://dj-magee-fitness.herokuapp.com/exercises
+
 Contributors:
 
 Darian Magee
