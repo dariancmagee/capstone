@@ -22,6 +22,9 @@ https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb/
 Deployed app:
 https://dj-magee-fitness.herokuapp.com/exercises
 
+Video walkthrough:
+https://www.youtube.com/watch?v=n98l3B8tk24
+
 Contributors:
 
 Darian Magee
